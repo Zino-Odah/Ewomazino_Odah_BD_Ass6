@@ -1,0 +1,25 @@
+extends app
+
+block content
+    main.container
+        // banner post
+        include posts/banner
+        // featured posts
+        .row.mb-2
+            each post, index in featuredPosts
+                if index !== 0
+                    include posts/featured
+        // other blog posts
+        .row.g-5
+            .col-md-8
+                h3.pb-4.mb-4.fst-italic.border-bottom
+                    | From the Firehose
+                include posts/post-card
+            .col-md-4
+                .position-sticky(style='top: 2rem;')
+                    // about
+                    include sidebar/about
+                    // archives
+                    include sidebar/archives
+                    // social links
+                    include sidebar/social-links

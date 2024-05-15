@@ -1,0 +1,6 @@
+.p-4
+    h4.fst-italic Archives
+    ol.list-unstyled.mb-0
+        each item in archives
+            li.mb-1
+                a(href='#') #{ new Intl.DateTimeFormat("en-US", {month: "long"}).format(item) } #{ item.getFullYear() }

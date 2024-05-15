@@ -1,0 +1,10 @@
+each post in posts
+    article.blog-post
+        h2.blog-post-title.mb-1 #{post.title}
+        p.blog-post-meta
+            | #{ post.created_at } by
+            |
+            a(href='#') #{ post.author }
+        p
+            | #{ post.body.slice(0, 200) }...
+        a(href=`/${ post.slug }`) Continue reading

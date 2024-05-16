@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 const { parse, isSameDay, isBefore } = require("date-fns");
+const { Console } = require('console');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -25,17 +26,26 @@ router.get('/', function(req, res, next) {
 
   let navigationLinks = Array.from(new Set(data.map((post) => post.category).sort()));
 
+  // let category = data.map((post) => post.category).sort());
+
   let dates = data.map(function(post) {
     let [year, month] = post.created_at.split('-');
     return new Date(`${year}-${month}-01`);
   });
+
+  // let postDetail = data.map((post) => post.body);
+
+  // let category = data.filter((post) => post.category)
+  // console.log(postDetail)
 
   res.render('index', {
     title: 'She Code Queens',
     links: navigationLinks,
     posts: data.filter((post) => ! post.is_featured),
     featuredPosts: data.filter((post) => post.is_featured),
-    archives: Array.from(new Set(dates))
+    archives: Array.from(new Set(dates)),
+    // categories,
+    // detail: postDetail
   });
 
 });

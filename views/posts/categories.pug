@@ -1,5 +1,7 @@
-
-    .nav-scroller.py-1.mb-2
-        nav.nav.d-flex.justify-content-between
-            each item in links
-                a.p-2.link-secondary(href=`categories/${item}`) #{ item }
+each item in links
+    article.blog-post
+        //- h2.blog-post-title.mb-1 #{post.title}
+        strong.d-inline-block.mb-2.text-primary #{item}
+        each post in categories[item]
+            h3.mb-0 #{post.title}
+            .my-1.text-muted #{ post.created_at } by #{ post.author }

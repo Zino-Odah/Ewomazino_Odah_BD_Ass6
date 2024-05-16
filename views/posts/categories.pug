@@ -1,6 +1,5 @@
 each item in links
     article.blog-post
-        //- h2.blog-post-title.mb-1 #{post.title}
         strong.d-inline-block.mb-2.text-primary #{item}
         each post in categories[item]
             h3.mb-0 #{post.title}

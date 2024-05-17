@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 const { parse, isSameDay, isBefore } = require("date-fns");
+const { Console } = require('console');
+const { post } = require('jquery');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -22,8 +24,19 @@ router.get('/', function(req, res, next) {
 
     return -1;
   });
-
+  
   let navigationLinks = Array.from(new Set(data.map((post) => post.category).sort()));
+  
+  let categoryFilteredPosts = {};
+
+  data.forEach(post => {
+    const category = post.category;
+    if(!categoryFilteredPosts[category]){
+      categoryFilteredPosts[category] = [];
+    }
+    categoryFilteredPosts[category].push(post);
+  })
+  // console.log(categoryFilteredPosts)
 
   let dates = data.map(function(post) {
     let [year, month] = post.created_at.split('-');
@@ -35,7 +48,8 @@ router.get('/', function(req, res, next) {
     links: navigationLinks,
     posts: data.filter((post) => ! post.is_featured),
     featuredPosts: data.filter((post) => post.is_featured),
-    archives: Array.from(new Set(dates))
+    archives: Array.from(new Set(dates)),
+    categories: categoryFilteredPosts
   });
 
 });

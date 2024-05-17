@@ -1,0 +1,6 @@
+each item in links
+    article.blog-post
+        strong.d-inline-block.mb-2.text-primary #{item}
+        each post in categories[item]
+            h3.mb-0 #{post.title}
+            .my-1.text-muted #{ post.created_at } by #{ post.author }
